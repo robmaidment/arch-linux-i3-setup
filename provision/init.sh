@@ -4,7 +4,7 @@ set -euxo pipefail
 # local testing
 export RESOLUTION=1024x768
 
-#sudo pacman --noconfirm -Syyu
+sudo pacman --noconfirm -Syyu
 
 # remove guest utils provided by the box (they do not work in the GUI environment)
 sudo pacman --noconfirm -R virtualbox-guest-utils-nox || true
@@ -62,10 +62,4 @@ gpasswd -a vagrant wheel
 
 #set keyboard settings for arch & x server
 localectl --no-convert set-keymap en-latin1-nodeadkeys
-setxkbmap -layout gb
-
-# install AUR helper yay
-git clone https://aur.archlinux.org/yay.git 
-chmod 777 yay && cd yay
-makepkg --noconfirm -si
-cd .. && rm -r yay
+localectl set-x11-keymap gb pc105 extd terminate:ctrl_alt_bksp

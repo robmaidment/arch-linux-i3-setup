@@ -10,9 +10,9 @@ Vagrant.configure("2") do |config|
   config.vm.box = "archlinux/archlinux"
   config.disksize.size = '30GB' 
   config.vm.provider "virtualbox" do |virtualbox|
-    virtualbox.name = "ArchLinux"
-    virtualbox.memory = 2024
-    virtualbox.cpus= 4
+    virtualbox.name = "default"
+    virtualbox.memory = 4048
+    virtualbox.cpus= 1
     virtualbox.customize ["modifyvm", :id, "--vram", "256"]
     virtualbox.gui = true
   end

@@ -1,3 +1,9 @@
+# yay
+git clone https://aur.archlinux.org/yay.git 
+chmod 777 yay && cd yay
+makepkg --noconfirm -si
+cd .. && rm -r yay
+
 #!/usr/bin/env bash
 set -euxo pipefail
 
