@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 set -euxo pipefail
 
-# local testing
-export RESOLUTION=1024x768
+export initialres=800x600
 
-sudo pacman --noconfirm -Syyu
+#pacman --noconfirm -Syyu
 
 # remove guest utils provided by the box (they do not work in the GUI environment)
-sudo pacman --noconfirm -R virtualbox-guest-utils-nox || true
+pacman --noconfirm -R virtualbox-guest-utils-nox || true
 
-sudo pacman --noconfirm -Sy \
+pacman --noconfirm -Sy \
+    vi \
+    vim \
     base-devel \
     net-tools \
     neovim \
@@ -21,31 +22,29 @@ sudo pacman --noconfirm -Sy \
     dialog \
     alsa-utils \
     pulseaudio \
-    xorg-server \
-    xorg-xfontsel \
-    xorg-xrdb \
-    xorg-setxkbmap \
-    xorg-xinit \
+    xorg \
     xf86-video-intel \
     xf86-input-synaptics \
     xf86-input-libinput \
     xclip \
     feh \
-    rxvt-unicode \
+    termite \
     chromium \
     virtualbox-guest-utils \
     i3 \
     dmenu \
-    xorg-drivers \
     ttf-dejavu \
     ranger \
+    lightdm \
+    lightdm-gtk-greeter
 
-sed -i "s/.*GRUB_CMDLINE_LINUX_DEFAULT.*/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet video=${RESOLUTION}\"/"  /etc/default/grub
-sed -i "s/.*GRUB_GFXMODE.*/GRUB_GFXMODE=\"${RESOLUTION}x24\"/"  /etc/default/grub
+sed -i "s/.*GRUB_CMDLINE_LINUX_DEFAULT.*/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet video=${initialres}\"/"  /etc/default/grub
+sed -i "s/.*GRUB_GFXMODE.*/GRUB_GFXMODE=\"${initialres}x24\"/"  /etc/default/grub
 
 grub-mkconfig -o /boot/grub/grub.cfg
 
 systemctl enable vboxservice.service
+systemctl enable lightdm.service
 
 # generate & set locales
 echo 'LANG=en_GB.UTF-8' | sudo tee /etc/locale.conf

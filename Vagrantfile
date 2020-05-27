@@ -17,13 +17,12 @@ Vagrant.configure("2") do |config|
     virtualbox.gui = true
   end
 
-  config.vm.synced_folder ".", "/home/vagrant/root"
-  config.vm.post_up_message = "Installation finished! Have fun!"
+  config.vm.synced_folder ".", "/home/vagrant/mount", automount: true
+  config.vm.post_up_message = "complete"
 
-  # baseline
-  config.vm.provision "shell", path: "provision/init.sh", env: {"RESOLUTION" => "800x600"}, privileged: true
-  
-  # userspace
-  config.vm.provision "shell", path: "provision/profile.sh", privileged: false
+  config.vm.provision "shell", name: "init", path: "provision/init.sh", env: {"RESOLUTION" => "800x600"}, privileged: true
+  config.vm.provision "shell", name: "user", path: "provision/user.sh", privileged: false
+
+  config.vm.provision "shell", name: "profile", path: "provision/profile.sh", privileged: false
 
 end
