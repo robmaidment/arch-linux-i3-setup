@@ -12,3 +12,7 @@ update:
 build:
 	vagrant destroy -f && sleep 15 && vagrant up
 
+## for windows gitbash
+
+gb-init:
+	echo "alias ll='ls -al'" > ~/.bashrc
