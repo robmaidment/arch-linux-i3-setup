@@ -3,7 +3,7 @@ set -euxo pipefail
 
 export initialres=800x600
 
-#pacman --noconfirm -Syyu
+pacman --noconfirm -Syyu
 
 # remove guest utils provided by the box (they do not work in the GUI environment)
 pacman --noconfirm -R virtualbox-guest-utils-nox || true
@@ -40,6 +40,8 @@ pacman --noconfirm -Sy \
 
 sed -i "s/.*GRUB_CMDLINE_LINUX_DEFAULT.*/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet video=${initialres}\"/"  /etc/default/grub
 sed -i "s/.*GRUB_GFXMODE.*/GRUB_GFXMODE=\"${initialres}x24\"/"  /etc/default/grub
+
+echo "TERMINAL=termite" > /etc/profile.d/custom-terminal.sh
 
 grub-mkconfig -o /boot/grub/grub.cfg
 

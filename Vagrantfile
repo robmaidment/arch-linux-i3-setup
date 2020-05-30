@@ -1,3 +1,8 @@
+#
+# note we could use package to bake an intermediate and save time
+# https://scotch.io/tutorials/how-to-create-a-vagrant-base-box-from-an-existing-one
+
+
 Vagrant.configure("2") do |config|
   vagrantfile_directory= File.dirname(__FILE__)
   
@@ -20,9 +25,9 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/home/vagrant/mount", automount: true
   config.vm.post_up_message = "complete"
 
-  config.vm.provision "shell", name: "init", path: "provision/init.sh", env: {"RESOLUTION" => "800x600"}, privileged: true
+  config.vm.provision "shell", name: "init", path: "provision/init.sh", privileged: true
   config.vm.provision "shell", name: "user", path: "provision/user.sh", privileged: false
 
-  config.vm.provision "shell", name: "profile", path: "provision/profile.sh", privileged: false
+  config.vm.provision "shell", name: "output", path: "provision/output.sh", privileged: false
 
 end
