@@ -1,5 +1,11 @@
-## i3 workstation definition
+# Workstation
+## for Linux working on Windows
 
-This is a pain in the ass to build.
-
+## Notes
 pacman -Syyu is essential ( but slow ) as a first step or shit goes downhill fast.
+
+## Required
+- Make
+- Vagrant
+- Virtualbox
+- Internet connectivity (!) 
