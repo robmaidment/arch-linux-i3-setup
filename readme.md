@@ -10,6 +10,6 @@ Linux working on Windows
 
 
 ## My notes
-Basing it on Arch might not have been a Great idea.
+Basing it on Arch might not have been a Great idea.  
 ```pacman -Syyu``` 
 is essential ( but slow ) as a first step or shit goes downhill fast.
